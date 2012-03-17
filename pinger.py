@@ -1,3 +1,5 @@
+#!/usr/bin/env python2
+
 import subprocess
 import time
 from mongolog import MongoLogger, get_targets
