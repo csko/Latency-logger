@@ -22,7 +22,7 @@ def measure_latency():
 
 mongologger = MongoLogger()
 
-DELAY = 5
+DELAY = 60
 
 while True:
     pings = measure_latency()
