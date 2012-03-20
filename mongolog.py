@@ -23,6 +23,8 @@ class LatencyFormatter(logging.Formatter):
             document[key] = record.__dict__[key]
         return document
 
+# TODO: ConnectionFailure
+
 MONGOHANDLER = MongoHandler(
         host = MONGOHOST,
         port = MONGOPORT,
@@ -43,11 +45,14 @@ class MongoLogger():
 
     def log(self, src, dest, latency):
         data = {'from' : src, 'to' : dest, 'latency' : latency}
+        # TODO :AutoReconnect
         self.logger.info(None, extra=data)
 
 def get_targets():
     connection = MONGOHANDLER.connection
     db = connection.latencystats
+    # TODO :AutoReconnect
+
     for target in db.targets.find(): # TODO: make this collection name configurable
         if target['enabled']:
             yield target['host']
